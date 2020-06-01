@@ -307,18 +307,18 @@ void print_FND(unsigned short num){
 int main(void)
 {
     /* Replace with your application code */
-	unsigned short cnt = (unsigned short)1234;
-	DDRD = 0xFF;
- 1dc:	8f ef       	ldi	r24, 0xFF	; 255
+	unsigned short cnt = (unsigned short)5555;
+	DDRD = 0x0F;
+ 1dc:	8f e0       	ldi	r24, 0x0F	; 15
  1de:	81 bb       	out	0x11, r24	; 17
-	DDRE = 0xFF;
+	DDRE = 0x0F;
  1e0:	82 b9       	out	0x02, r24	; 2
 	
     while (1) 
     {
 		print_FND(cnt);
- 1e2:	82 ed       	ldi	r24, 0xD2	; 210
- 1e4:	94 e0       	ldi	r25, 0x04	; 4
+ 1e2:	83 eb       	ldi	r24, 0xB3	; 179
+ 1e4:	95 e1       	ldi	r25, 0x15	; 21
  1e6:	5b df       	rcall	.-330    	; 0x9e <print_FND>
  1e8:	fc cf       	rjmp	.-8      	; 0x1e2 <main+0x6>
 

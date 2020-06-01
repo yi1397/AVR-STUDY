@@ -9,15 +9,16 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 void print_FND(unsigned short num);
 
 int main(void)
 {
     /* Replace with your application code */
-	unsigned short cnt = (unsigned short)1234;
-	DDRD = 0xFF;
-	DDRE = 0xFF;
+	unsigned short cnt = (unsigned short)5555;
+	DDRD = 0x0F;
+	DDRE = 0x0F;
 	
     while (1) 
     {
