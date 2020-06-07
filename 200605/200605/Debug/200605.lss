@@ -1,31 +1,31 @@
 
-200601.elf:     file format elf32-avr
+200605.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000004  00800100  00000336  000003aa  2**0
+  0 .data         0000000c  00800100  000002ba  0000032e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000336  00000000  00000000  00000074  2**1
+  1 .text         000002ba  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000003ae  2**0
+  2 .comment      00000030  00000000  00000000  0000033a  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003e0  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000036c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000028  00000000  00000000  0000041c  2**0
+  4 .debug_aranges 00000028  00000000  00000000  000003a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000a70  00000000  00000000  00000444  2**0
+  5 .debug_info   00000a2e  00000000  00000000  000003d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000089a  00000000  00000000  00000eb4  2**0
+  6 .debug_abbrev 000008a1  00000000  00000000  00000dfe  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000389  00000000  00000000  0000174e  2**0
+  7 .debug_line   0000033b  00000000  00000000  0000169f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000048  00000000  00000000  00001ad8  2**2
+  8 .debug_frame  00000048  00000000  00000000  000019dc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000424  00000000  00000000  00001b20  2**0
+  9 .debug_str    00000451  00000000  00000000  00001a24  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000002d3  00000000  00000000  00001f44  2**0
+ 10 .debug_loc    00000247  00000000  00000000  00001e75  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000018  00000000  00000000  00002217  2**0
+ 11 .debug_ranges 00000018  00000000  00000000  000020bc  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -114,18 +114,18 @@ Disassembly of section .text:
   98:	11 e0       	ldi	r17, 0x01	; 1
   9a:	a0 e0       	ldi	r26, 0x00	; 0
   9c:	b1 e0       	ldi	r27, 0x01	; 1
-  9e:	e6 e3       	ldi	r30, 0x36	; 54
-  a0:	f3 e0       	ldi	r31, 0x03	; 3
+  9e:	ea eb       	ldi	r30, 0xBA	; 186
+  a0:	f2 e0       	ldi	r31, 0x02	; 2
   a2:	00 e0       	ldi	r16, 0x00	; 0
   a4:	0b bf       	out	0x3b, r16	; 59
   a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
   a8:	07 90       	elpm	r0, Z+
   aa:	0d 92       	st	X+, r0
-  ac:	a4 30       	cpi	r26, 0x04	; 4
+  ac:	ac 30       	cpi	r26, 0x0C	; 12
   ae:	b1 07       	cpc	r27, r17
   b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
-  b2:	1f d1       	rcall	.+574    	; 0x2f2 <main>
-  b4:	3e c1       	rjmp	.+636    	; 0x332 <_exit>
+  b2:	e0 d0       	rcall	.+448    	; 0x274 <main>
+  b4:	00 c1       	rjmp	.+512    	; 0x2b6 <_exit>
 
 000000b6 <__bad_interrupt>:
   b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
@@ -148,7 +148,7 @@ void FND_print(unsigned int num)
   c2:	9c 01       	movw	r18, r24
   c4:	ad ec       	ldi	r26, 0xCD	; 205
   c6:	bc ec       	ldi	r27, 0xCC	; 204
-  c8:	25 d1       	rcall	.+586    	; 0x314 <__umulhisi3>
+  c8:	e7 d0       	rcall	.+462    	; 0x298 <__umulhisi3>
   ca:	ac 01       	movw	r20, r24
   cc:	56 95       	lsr	r21
   ce:	47 95       	ror	r20
@@ -175,7 +175,7 @@ void FND_print(unsigned int num)
 	buff |= (num % 10) << 4;
 	num /= 10;
 	buff |= (num % 10) << 8;
-  f6:	0e d1       	rcall	.+540    	; 0x314 <__umulhisi3>
+  f6:	d0 d0       	rcall	.+416    	; 0x298 <__umulhisi3>
   f8:	8c 01       	movw	r16, r24
   fa:	16 95       	lsr	r17
   fc:	07 95       	ror	r16
@@ -184,7 +184,7 @@ void FND_print(unsigned int num)
  102:	16 95       	lsr	r17
  104:	07 95       	ror	r16
  106:	98 01       	movw	r18, r16
- 108:	05 d1       	rcall	.+522    	; 0x314 <__umulhisi3>
+ 108:	c7 d0       	rcall	.+398    	; 0x298 <__umulhisi3>
  10a:	96 95       	lsr	r25
  10c:	87 95       	ror	r24
  10e:	96 95       	lsr	r25
@@ -217,14 +217,14 @@ void FND_print(unsigned int num)
  144:	27 95       	ror	r18
  146:	ab e7       	ldi	r26, 0x7B	; 123
  148:	b4 e1       	ldi	r27, 0x14	; 20
- 14a:	e4 d0       	rcall	.+456    	; 0x314 <__umulhisi3>
+ 14a:	a6 d0       	rcall	.+332    	; 0x298 <__umulhisi3>
  14c:	fc 01       	movw	r30, r24
  14e:	f6 95       	lsr	r31
  150:	e7 95       	ror	r30
  152:	9f 01       	movw	r18, r30
  154:	ad ec       	ldi	r26, 0xCD	; 205
  156:	bc ec       	ldi	r27, 0xCC	; 204
- 158:	dd d0       	rcall	.+442    	; 0x314 <__umulhisi3>
+ 158:	9f d0       	rcall	.+318    	; 0x298 <__umulhisi3>
  15a:	96 95       	lsr	r25
  15c:	87 95       	ror	r24
  15e:	96 95       	lsr	r25
@@ -262,7 +262,7 @@ void FND_print(unsigned int num)
  19a:	27 95       	ror	r18
  19c:	a5 ec       	ldi	r26, 0xC5	; 197
  19e:	b0 e2       	ldi	r27, 0x20	; 32
- 1a0:	b9 d0       	rcall	.+370    	; 0x314 <__umulhisi3>
+ 1a0:	7b d0       	rcall	.+246    	; 0x298 <__umulhisi3>
  1a2:	fc 01       	movw	r30, r24
  1a4:	f2 95       	swap	r31
  1a6:	e2 95       	swap	r30
@@ -273,7 +273,7 @@ void FND_print(unsigned int num)
  1b0:	9f 01       	movw	r18, r30
  1b2:	ad ec       	ldi	r26, 0xCD	; 205
  1b4:	bc ec       	ldi	r27, 0xCC	; 204
- 1b6:	ae d0       	rcall	.+348    	; 0x314 <__umulhisi3>
+ 1b6:	70 d0       	rcall	.+224    	; 0x298 <__umulhisi3>
  1b8:	96 95       	lsr	r25
  1ba:	87 95       	ror	r24
  1bc:	96 95       	lsr	r25
@@ -300,230 +300,185 @@ void FND_print(unsigned int num)
  1e6:	70 7f       	andi	r23, 0xF0	; 240
  1e8:	64 2b       	or	r22, r20
  1ea:	75 2b       	or	r23, r21
- 1ec:	98 b3       	in	r25, 0x18	; 24
+ 1ec:	18 ba       	out	0x18, r1	; 24
 	num /= 10;
 	
-	PORTB |= pin_LATCH;
- 1ee:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <pin_LATCH>
- 1f2:	89 2b       	or	r24, r25
- 1f4:	88 bb       	out	0x18, r24	; 24
- 1f6:	48 e0       	ldi	r20, 0x08	; 8
-	for(int i = 8; i < 16; i++){
- 1f8:	50 e0       	ldi	r21, 0x00	; 0
- 1fa:	e1 e0       	ldi	r30, 0x01	; 1
-		if(buff & (0x01 << i)) PORTB = PORTB | pin_DATA;
- 1fc:	f0 e0       	ldi	r31, 0x00	; 0
- 1fe:	cf 01       	movw	r24, r30
- 200:	04 2e       	mov	r0, r20
- 202:	02 c0       	rjmp	.+4      	; 0x208 <FND_print+0x150>
- 204:	88 0f       	add	r24, r24
- 206:	99 1f       	adc	r25, r25
- 208:	0a 94       	dec	r0
- 20a:	e2 f7       	brpl	.-8      	; 0x204 <FND_print+0x14c>
- 20c:	86 23       	and	r24, r22
- 20e:	97 23       	and	r25, r23
- 210:	89 2b       	or	r24, r25
- 212:	31 f0       	breq	.+12     	; 0x220 <FND_print+0x168>
- 214:	98 b3       	in	r25, 0x18	; 24
- 216:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 21a:	89 2b       	or	r24, r25
- 21c:	88 bb       	out	0x18, r24	; 24
- 21e:	06 c0       	rjmp	.+12     	; 0x22c <FND_print+0x174>
- 220:	98 b3       	in	r25, 0x18	; 24
-		else PORTB = PORTB &~ pin_DATA;
- 222:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 226:	80 95       	com	r24
- 228:	89 23       	and	r24, r25
- 22a:	88 bb       	out	0x18, r24	; 24
- 22c:	98 b3       	in	r25, 0x18	; 24
-		PORTB = PORTB | pin_CLOCK;
- 22e:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <pin_CLOCK>
- 232:	98 2b       	or	r25, r24
- 234:	98 bb       	out	0x18, r25	; 24
- 236:	8f e8       	ldi	r24, 0x8F	; 143
+	PORTB = 0x00;
+ 1ee:	e3 e0       	ldi	r30, 0x03	; 3
+ 1f0:	f1 e0       	ldi	r31, 0x01	; 1
+ 1f2:	ab e0       	ldi	r26, 0x0B	; 11
+ 1f4:	b1 e0       	ldi	r27, 0x01	; 1
+ 1f6:	33 c0       	rjmp	.+102    	; 0x25e <FND_print+0x1a6>
+ 1f8:	20 81       	ld	r18, Z
+	
+	for(int i = 0; i < 4; i++)
+	{
+		for(int j = 0; j < 4; j++){
+			if(buff & (output_order_FND[i] >> j)) PORTB = PORTB | pin_DATA;
+ 1fa:	31 81       	ldd	r19, Z+1	; 0x01
+ 1fc:	04 2e       	mov	r0, r20
+ 1fe:	02 c0       	rjmp	.+4      	; 0x204 <FND_print+0x14c>
+ 200:	36 95       	lsr	r19
+ 202:	27 95       	ror	r18
+ 204:	0a 94       	dec	r0
+ 206:	e2 f7       	brpl	.-8      	; 0x200 <FND_print+0x148>
+ 208:	26 23       	and	r18, r22
+ 20a:	37 23       	and	r19, r23
+ 20c:	23 2b       	or	r18, r19
+ 20e:	31 f0       	breq	.+12     	; 0x21c <FND_print+0x164>
+ 210:	98 b3       	in	r25, 0x18	; 24
+ 212:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 216:	89 2b       	or	r24, r25
+ 218:	88 bb       	out	0x18, r24	; 24
+ 21a:	06 c0       	rjmp	.+12     	; 0x228 <FND_print+0x170>
+ 21c:	28 b3       	in	r18, 0x18	; 24
+			else PORTB = PORTB &~ pin_DATA;
+ 21e:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 222:	90 95       	com	r25
+ 224:	92 23       	and	r25, r18
+ 226:	98 bb       	out	0x18, r25	; 24
+ 228:	28 b3       	in	r18, 0x18	; 24
+			PORTB = PORTB | pin_CLOCK;
+ 22a:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <pin_CLOCK>
+ 22e:	92 2b       	or	r25, r18
+ 230:	98 bb       	out	0x18, r25	; 24
+ 232:	8f e8       	ldi	r24, 0x8F	; 143
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 238:	91 e0       	ldi	r25, 0x01	; 1
- 23a:	01 97       	sbiw	r24, 0x01	; 1
- 23c:	f1 f7       	brne	.-4      	; 0x23a <FND_print+0x182>
- 23e:	00 c0       	rjmp	.+0      	; 0x240 <FND_print+0x188>
- 240:	00 00       	nop
- 242:	38 b3       	in	r19, 0x18	; 24
-		_delay_us(100);
-		PORTB = PORTB &~ pin_CLOCK;
- 244:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <pin_CLOCK>
- 248:	90 95       	com	r25
- 24a:	93 23       	and	r25, r19
- 24c:	98 bb       	out	0x18, r25	; 24
- 24e:	8f e8       	ldi	r24, 0x8F	; 143
- 250:	91 e0       	ldi	r25, 0x01	; 1
- 252:	01 97       	sbiw	r24, 0x01	; 1
- 254:	f1 f7       	brne	.-4      	; 0x252 <FND_print+0x19a>
- 256:	00 c0       	rjmp	.+0      	; 0x258 <FND_print+0x1a0>
- 258:	00 00       	nop
- 25a:	4f 5f       	subi	r20, 0xFF	; 255
-	num /= 10;
+ 234:	91 e0       	ldi	r25, 0x01	; 1
+ 236:	01 97       	sbiw	r24, 0x01	; 1
+ 238:	f1 f7       	brne	.-4      	; 0x236 <FND_print+0x17e>
+ 23a:	00 c0       	rjmp	.+0      	; 0x23c <FND_print+0x184>
+ 23c:	00 00       	nop
+ 23e:	18 ba       	out	0x18, r1	; 24
+			_delay_us(100);
+			PORTB = 0x00;
+ 240:	8f e8       	ldi	r24, 0x8F	; 143
+ 242:	91 e0       	ldi	r25, 0x01	; 1
+ 244:	01 97       	sbiw	r24, 0x01	; 1
+ 246:	f1 f7       	brne	.-4      	; 0x244 <FND_print+0x18c>
+ 248:	00 c0       	rjmp	.+0      	; 0x24a <FND_print+0x192>
+ 24a:	00 00       	nop
+ 24c:	4f 5f       	subi	r20, 0xFF	; 255
+	
+	PORTB = 0x00;
+	
+	for(int i = 0; i < 4; i++)
+	{
+		for(int j = 0; j < 4; j++){
+ 24e:	5f 4f       	sbci	r21, 0xFF	; 255
+ 250:	44 30       	cpi	r20, 0x04	; 4
+ 252:	51 05       	cpc	r21, r1
+ 254:	89 f6       	brne	.-94     	; 0x1f8 <FND_print+0x140>
+ 256:	32 96       	adiw	r30, 0x02	; 2
+ 258:	ae 17       	cp	r26, r30
 	buff |= (num % 10) << 12;
 	num /= 10;
 	
-	PORTB |= pin_LATCH;
-	for(int i = 8; i < 16; i++){
- 25c:	5f 4f       	sbci	r21, 0xFF	; 255
- 25e:	40 31       	cpi	r20, 0x10	; 16
- 260:	51 05       	cpc	r21, r1
- 262:	69 f6       	brne	.-102    	; 0x1fe <FND_print+0x146>
- 264:	98 b3       	in	r25, 0x18	; 24
-		PORTB = PORTB | pin_CLOCK;
-		_delay_us(100);
-		PORTB = PORTB &~ pin_CLOCK;
-		_delay_us(100);
-	}
-	PORTB |= pin_LATCH;
- 266:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <pin_LATCH>
- 26a:	89 2b       	or	r24, r25
- 26c:	88 bb       	out	0x18, r24	; 24
- 26e:	98 b3       	in	r25, 0x18	; 24
+	PORTB = 0x00;
 	
-	PORTB &=~ pin_LATCH;
- 270:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <pin_LATCH>
- 274:	80 95       	com	r24
- 276:	89 23       	and	r24, r25
- 278:	88 bb       	out	0x18, r24	; 24
- 27a:	40 e0       	ldi	r20, 0x00	; 0
-	for(int i = 0; i < 8; i++){
- 27c:	50 e0       	ldi	r21, 0x00	; 0
- 27e:	e1 e0       	ldi	r30, 0x01	; 1
-		if(buff & (0x01 << i)) PORTB = PORTB | pin_DATA;
- 280:	f0 e0       	ldi	r31, 0x00	; 0
- 282:	cf 01       	movw	r24, r30
- 284:	04 2e       	mov	r0, r20
- 286:	02 c0       	rjmp	.+4      	; 0x28c <FND_print+0x1d4>
- 288:	88 0f       	add	r24, r24
- 28a:	99 1f       	adc	r25, r25
- 28c:	0a 94       	dec	r0
- 28e:	e2 f7       	brpl	.-8      	; 0x288 <FND_print+0x1d0>
- 290:	86 23       	and	r24, r22
- 292:	97 23       	and	r25, r23
- 294:	89 2b       	or	r24, r25
- 296:	31 f0       	breq	.+12     	; 0x2a4 <FND_print+0x1ec>
- 298:	98 b3       	in	r25, 0x18	; 24
- 29a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 29e:	89 2b       	or	r24, r25
- 2a0:	88 bb       	out	0x18, r24	; 24
- 2a2:	06 c0       	rjmp	.+12     	; 0x2b0 <FND_print+0x1f8>
- 2a4:	98 b3       	in	r25, 0x18	; 24
-		else PORTB = PORTB &~ pin_DATA;
- 2a6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 2aa:	80 95       	com	r24
- 2ac:	89 23       	and	r24, r25
- 2ae:	88 bb       	out	0x18, r24	; 24
- 2b0:	88 b3       	in	r24, 0x18	; 24
-		PORTB = PORTB | pin_CLOCK;
- 2b2:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <pin_CLOCK>
- 2b6:	98 2b       	or	r25, r24
- 2b8:	98 bb       	out	0x18, r25	; 24
- 2ba:	8f e8       	ldi	r24, 0x8F	; 143
- 2bc:	91 e0       	ldi	r25, 0x01	; 1
- 2be:	01 97       	sbiw	r24, 0x01	; 1
- 2c0:	f1 f7       	brne	.-4      	; 0x2be <FND_print+0x206>
- 2c2:	00 c0       	rjmp	.+0      	; 0x2c4 <FND_print+0x20c>
- 2c4:	00 00       	nop
- 2c6:	38 b3       	in	r19, 0x18	; 24
-		_delay_us(100);
-		PORTB = PORTB &~ pin_CLOCK;
- 2c8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <pin_CLOCK>
- 2cc:	90 95       	com	r25
- 2ce:	93 23       	and	r25, r19
- 2d0:	98 bb       	out	0x18, r25	; 24
- 2d2:	8f e8       	ldi	r24, 0x8F	; 143
- 2d4:	91 e0       	ldi	r25, 0x01	; 1
- 2d6:	01 97       	sbiw	r24, 0x01	; 1
- 2d8:	f1 f7       	brne	.-4      	; 0x2d6 <FND_print+0x21e>
- 2da:	00 c0       	rjmp	.+0      	; 0x2dc <FND_print+0x224>
- 2dc:	00 00       	nop
- 2de:	4f 5f       	subi	r20, 0xFF	; 255
-		_delay_us(100);
+	for(int i = 0; i < 4; i++)
+ 25a:	bf 07       	cpc	r27, r31
+ 25c:	19 f0       	breq	.+6      	; 0x264 <FND_print+0x1ac>
+ 25e:	40 e0       	ldi	r20, 0x00	; 0
+		_delay_ms(1000);
+    }
+}
+
+void FND_print(unsigned int num)
+{
+ 260:	50 e0       	ldi	r21, 0x00	; 0
+ 262:	ca cf       	rjmp	.-108    	; 0x1f8 <FND_print+0x140>
+ 264:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <pin_LATCH>
+			PORTB = 0x00;
+			_delay_us(100);
+		}
 	}
-	PORTB |= pin_LATCH;
 	
-	PORTB &=~ pin_LATCH;
-	for(int i = 0; i < 8; i++){
- 2e0:	5f 4f       	sbci	r21, 0xFF	; 255
- 2e2:	48 30       	cpi	r20, 0x08	; 8
- 2e4:	51 05       	cpc	r21, r1
- 2e6:	69 f6       	brne	.-102    	; 0x282 <FND_print+0x1ca>
- 2e8:	df 91       	pop	r29
-		PORTB = PORTB &~ pin_CLOCK;
-		_delay_us(100);
-	}
+	PORTB = pin_LATCH;
+ 268:	88 bb       	out	0x18, r24	; 24
+ 26a:	df 91       	pop	r29
+	
 	
 	return;
- 2ea:	cf 91       	pop	r28
- 2ec:	1f 91       	pop	r17
- 2ee:	0f 91       	pop	r16
- 2f0:	08 95       	ret
+}
+ 26c:	cf 91       	pop	r28
+ 26e:	1f 91       	pop	r17
+ 270:	0f 91       	pop	r16
+ 272:	08 95       	ret
 
-000002f2 <main>:
- 2f2:	87 e0       	ldi	r24, 0x07	; 7
+00000274 <main>:
+ 274:	87 e0       	ldi	r24, 0x07	; 7
 void FND_print(unsigned int num);
 
 int main(void)
 {
     /* Replace with your application code */
     DDRB = 0x07;
- 2f4:	87 bb       	out	0x17, r24	; 23
+ 276:	87 bb       	out	0x17, r24	; 23
 	
 	unsigned int cnt = 0;
- 2f6:	c0 e0       	ldi	r28, 0x00	; 0
- 2f8:	d0 e0       	ldi	r29, 0x00	; 0
+	
+	PORTB = 0x00;
+ 278:	18 ba       	out	0x18, r1	; 24
+int main(void)
+{
+    /* Replace with your application code */
+    DDRB = 0x07;
+	
+	unsigned int cnt = 0;
+ 27a:	c0 e0       	ldi	r28, 0x00	; 0
+ 27c:	d0 e0       	ldi	r29, 0x00	; 0
+	
+	PORTB = 0x00;
 	
     while (1) 
     {
 		cnt++;
- 2fa:	21 96       	adiw	r28, 0x01	; 1
+ 27e:	21 96       	adiw	r28, 0x01	; 1
 		FND_print(cnt);
- 2fc:	ce 01       	movw	r24, r28
- 2fe:	dc de       	rcall	.-584    	; 0xb8 <FND_print>
+ 280:	ce 01       	movw	r24, r28
+ 282:	1a df       	rcall	.-460    	; 0xb8 <FND_print>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 300:	2f ef       	ldi	r18, 0xFF	; 255
- 302:	83 ed       	ldi	r24, 0xD3	; 211
- 304:	90 e3       	ldi	r25, 0x30	; 48
- 306:	21 50       	subi	r18, 0x01	; 1
- 308:	80 40       	sbci	r24, 0x00	; 0
- 30a:	90 40       	sbci	r25, 0x00	; 0
- 30c:	e1 f7       	brne	.-8      	; 0x306 <main+0x14>
- 30e:	00 c0       	rjmp	.+0      	; 0x310 <main+0x1e>
- 310:	00 00       	nop
- 312:	f3 cf       	rjmp	.-26     	; 0x2fa <main+0x8>
+ 284:	2f ef       	ldi	r18, 0xFF	; 255
+ 286:	83 ed       	ldi	r24, 0xD3	; 211
+ 288:	90 e3       	ldi	r25, 0x30	; 48
+ 28a:	21 50       	subi	r18, 0x01	; 1
+ 28c:	80 40       	sbci	r24, 0x00	; 0
+ 28e:	90 40       	sbci	r25, 0x00	; 0
+ 290:	e1 f7       	brne	.-8      	; 0x28a <main+0x16>
+ 292:	00 c0       	rjmp	.+0      	; 0x294 <main+0x20>
+ 294:	00 00       	nop
+ 296:	f3 cf       	rjmp	.-26     	; 0x27e <main+0xa>
 
-00000314 <__umulhisi3>:
- 314:	a2 9f       	mul	r26, r18
- 316:	b0 01       	movw	r22, r0
- 318:	b3 9f       	mul	r27, r19
- 31a:	c0 01       	movw	r24, r0
- 31c:	a3 9f       	mul	r26, r19
- 31e:	70 0d       	add	r23, r0
- 320:	81 1d       	adc	r24, r1
- 322:	11 24       	eor	r1, r1
- 324:	91 1d       	adc	r25, r1
- 326:	b2 9f       	mul	r27, r18
- 328:	70 0d       	add	r23, r0
- 32a:	81 1d       	adc	r24, r1
- 32c:	11 24       	eor	r1, r1
- 32e:	91 1d       	adc	r25, r1
- 330:	08 95       	ret
+00000298 <__umulhisi3>:
+ 298:	a2 9f       	mul	r26, r18
+ 29a:	b0 01       	movw	r22, r0
+ 29c:	b3 9f       	mul	r27, r19
+ 29e:	c0 01       	movw	r24, r0
+ 2a0:	a3 9f       	mul	r26, r19
+ 2a2:	70 0d       	add	r23, r0
+ 2a4:	81 1d       	adc	r24, r1
+ 2a6:	11 24       	eor	r1, r1
+ 2a8:	91 1d       	adc	r25, r1
+ 2aa:	b2 9f       	mul	r27, r18
+ 2ac:	70 0d       	add	r23, r0
+ 2ae:	81 1d       	adc	r24, r1
+ 2b0:	11 24       	eor	r1, r1
+ 2b2:	91 1d       	adc	r25, r1
+ 2b4:	08 95       	ret
 
-00000332 <_exit>:
- 332:	f8 94       	cli
+000002b6 <_exit>:
+ 2b6:	f8 94       	cli
 
-00000334 <__stop_program>:
- 334:	ff cf       	rjmp	.-2      	; 0x334 <__stop_program>
+000002b8 <__stop_program>:
+ 2b8:	ff cf       	rjmp	.-2      	; 0x2b8 <__stop_program>

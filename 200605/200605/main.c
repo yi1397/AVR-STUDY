@@ -1,7 +1,7 @@
 /*
- * 200601.c
+ * 200605.c
  *
- * Created: 2020-06-01 오전 9:20:34
+ * Created: 2020-06-05 오후 4:44:41
  * Author : user
  */ 
 
@@ -9,6 +9,8 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+
+unsigned short output_order_FND[4] = {0x0800, 0x8000, 0x0008, 0x0080};
 
 unsigned char pin_LATCH = 0x01;
 unsigned char pin_CLOCK = 0x02;
@@ -22,6 +24,8 @@ int main(void)
     DDRB = 0x07;
 	
 	unsigned int cnt = 0;
+	
+	PORTB = 0x00;
 	
     while (1) 
     {
@@ -44,26 +48,23 @@ void FND_print(unsigned int num)
 	buff |= (num % 10) << 12;
 	num /= 10;
 	
-	PORTB |= pin_LATCH;
-	for(int i = 8; i < 16; i++){
-		if(buff & (0x01 << i)) PORTB = PORTB | pin_DATA;
-		else PORTB = PORTB &~ pin_DATA;
-		PORTB = PORTB | pin_CLOCK;
-		_delay_us(100);
-		PORTB = PORTB &~ pin_CLOCK;
-		_delay_us(100);
-	}
-	PORTB |= pin_LATCH;
+	PORTB = 0x00;
 	
-	PORTB &=~ pin_LATCH;
-	for(int i = 0; i < 8; i++){
-		if(buff & (0x01 << i)) PORTB = PORTB | pin_DATA;
-		else PORTB = PORTB &~ pin_DATA;
-		PORTB = PORTB | pin_CLOCK;
-		_delay_us(100);
-		PORTB = PORTB &~ pin_CLOCK;
-		_delay_us(100);
+	for(int i = 0; i < 4; i++)
+	{
+		for(int j = 0; j < 4; j++){
+			if(buff & (output_order_FND[i] >> j)) PORTB = PORTB | pin_DATA;
+			else PORTB = PORTB &~ pin_DATA;
+			PORTB = PORTB | pin_CLOCK;
+			_delay_us(100);
+			PORTB = 0x00;
+			_delay_us(100);
+		}
 	}
+	
+	PORTB = pin_LATCH;
+	
 	
 	return;
 }
+
