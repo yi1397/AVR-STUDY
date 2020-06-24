@@ -265,10 +265,10 @@ int main(void)
  140:	00 c0       	rjmp	.+0      	; 0x142 <main+0x76>
  142:	00 00       	nop
 		_delay_ms(5);
-		if(!((PIND) & 0x01)) sw = 1;
+		if(!(PIND & 0x01)) sw = 1;
  144:	80 9b       	sbis	0x10, 0	; 16
  146:	df 2c       	mov	r13, r15
-		if(!((PIND) & 0x02)) sw = 2;
+		if(!(PIND & 0x02)) sw = 2;
  148:	81 9b       	sbis	0x10, 1	; 16
  14a:	15 c0       	rjmp	.+42     	; 0x176 <main+0xaa>
 		cnt_time++;
@@ -310,8 +310,8 @@ int main(void)
 		PORTC = 0x02;
 		fnd_control((cnt/10)%10);
 		_delay_ms(5);
-		if(!((PIND) & 0x01)) sw = 1;
-		if(!((PIND) & 0x02)) sw = 2;
+		if(!(PIND & 0x01)) sw = 1;
+		if(!(PIND & 0x02)) sw = 2;
 		cnt_time++;
  176:	df 5f       	subi	r29, 0xFF	; 255
 		if(cnt_time == 50)
@@ -321,8 +321,8 @@ int main(void)
 		PORTC = 0x02;
 		fnd_control((cnt/10)%10);
 		_delay_ms(5);
-		if(!((PIND) & 0x01)) sw = 1;
-		if(!((PIND) & 0x02)) sw = 2;
+		if(!(PIND & 0x01)) sw = 1;
+		if(!(PIND & 0x02)) sw = 2;
  17c:	de 2c       	mov	r13, r14
  17e:	b6 cf       	rjmp	.-148    	; 0xec <main+0x20>
 			{

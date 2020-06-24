@@ -36,8 +36,8 @@ int main(void)
 		PORTC = 0x02;
 		fnd_control((cnt/10)%10);
 		_delay_ms(5);
-		if(!((PIND) & 0x01)) sw = 1;
-		if(!((PIND) & 0x02)) sw = 2;
+		if(!(PIND & 0x01)) sw = 1;
+		if(!(PIND & 0x02)) sw = 2;
 		cnt_time++;
 		if(cnt_time == 50)
 		{

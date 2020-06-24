@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>200617</AssemblyName>
-    <Name>200617</Name>
-    <RootNamespace>200617</RootNamespace>
+    <AssemblyName>200624</AssemblyName>
+    <Name>200624</Name>
+    <RootNamespace>200624</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
