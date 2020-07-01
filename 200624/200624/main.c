@@ -59,7 +59,7 @@ void LCD_INIT(void)
 	COMMAND(0b00101000);
 	_delay_us(39);
 	
-	COMMAND(0b00001100);
+	COMMAND(0b00001110);
 	_delay_us(39);
 	
 	COMMAND(0b00000001);
@@ -93,46 +93,47 @@ int main(void)
 	PORTC = 0x00;
 	LCD_INIT();
 	
-	unsigned char cnt_go = 0;
+	unsigned char x=1;
 	
-	unsigned long cnt = 0;
+	str_LCD("0000");
 	
-	unsigned long time_cnt = 9999;
+	unsigned char num[5] = {0,0,0,0};
+	
     while (1) 
     {
-	    COMMAND(0b00000010);
-		MOVE(1,7);
-		str_LCD("TIME");
-		
-		MOVE(2,5);
-		DATA((cnt/100000)%10 + '0');
-		DATA((cnt/10000)%10 + '0');
-		DATA(':');
-	    DATA((cnt/1000)%10 + '0');
-	    DATA((cnt/100)%10 + '0');
-		DATA(':');
-	    DATA((cnt/10)%10 + '0');
-		DATA(cnt%10 + '0');
-		_delay_ms(6);
-		if(cnt_go == 1)
+		if(!(PIND & 0x01))
 		{
-			 cnt+=2;
+			if(x!=1)
+			{
+				x--;
+			}
 		}
-		time_cnt+=2;
-		if(cnt == 1000000) cnt = 0;
-		
-		
-		if((!(PIND & 0x01)) & 100 < time_cnt)
+		else if(!(PIND & 0x02))
 		{
-			 cnt_go = !cnt_go;
-			 time_cnt = 0;
+			if(x!=4)
+			{
+				x++;
+			}
 		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
+		if(!(PIND & 0x04))
 		{
-			cnt_go = 0;
-			cnt = 0;
-			time_cnt = 0;
+			if (num[x]!=9)
+			{
+				
+				DATA('0'+(++num[x]));
+			}
 		}
+		if(!(PIND & 0x08))
+		{
+			if (num[x]!=0)
+			{
+				
+				DATA('0'+(--num[x]));
+			}
+		}
+		
+		MOVE(1,x);
+		_delay_ms(200);
     }
 }
 

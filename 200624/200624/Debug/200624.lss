@@ -3,29 +3,29 @@
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000006  00800100  000003a0  00000414  2**0
+  0 .data         00000006  00800100  0000029e  00000312  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000003a0  00000000  00000000  00000074  2**1
+  1 .text         0000029e  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  0000041a  2**0
+  2 .comment      00000030  00000000  00000000  00000318  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000044c  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000348  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000048  00000000  00000000  00000488  2**0
+  4 .debug_aranges 00000048  00000000  00000000  00000384  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000ece  00000000  00000000  000004d0  2**0
+  5 .debug_info   00000e29  00000000  00000000  000003cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000900  00000000  00000000  0000139e  2**0
+  6 .debug_abbrev 00000914  00000000  00000000  000011f5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000519  00000000  00000000  00001c9e  2**0
+  7 .debug_line   000004ca  00000000  00000000  00001b09  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000094  00000000  00000000  000021b8  2**2
+  8 .debug_frame  000000a4  00000000  00000000  00001fd4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000043c  00000000  00000000  0000224c  2**0
+  9 .debug_str    00000435  00000000  00000000  00002078  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000006b1  00000000  00000000  00002688  2**0
+ 10 .debug_loc    00000657  00000000  00000000  000024ad  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000038  00000000  00000000  00002d39  2**0
+ 11 .debug_ranges 00000038  00000000  00000000  00002b04  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -114,8 +114,8 @@ Disassembly of section .text:
   98:	11 e0       	ldi	r17, 0x01	; 1
   9a:	a0 e0       	ldi	r26, 0x00	; 0
   9c:	b1 e0       	ldi	r27, 0x01	; 1
-  9e:	e0 ea       	ldi	r30, 0xA0	; 160
-  a0:	f3 e0       	ldi	r31, 0x03	; 3
+  9e:	ee e9       	ldi	r30, 0x9E	; 158
+  a0:	f2 e0       	ldi	r31, 0x02	; 2
   a2:	00 e0       	ldi	r16, 0x00	; 0
   a4:	0b bf       	out	0x3b, r16	; 59
   a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
@@ -125,7 +125,7 @@ Disassembly of section .text:
   ae:	b1 07       	cpc	r27, r17
   b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
   b2:	91 d0       	rcall	.+290    	; 0x1d6 <main>
-  b4:	73 c1       	rjmp	.+742    	; 0x39c <_exit>
+  b4:	f2 c0       	rjmp	.+484    	; 0x29a <_exit>
 
 000000b6 <__bad_interrupt>:
   b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
@@ -235,7 +235,7 @@ void MOVE(int y, int x)
  16e:	20 ed       	ldi	r18, 0xD0	; 208
  170:	2a 95       	dec	r18
  172:	f1 f7       	brne	.-4      	; 0x170 <LCD_INIT+0x18>
- 174:	8c e0       	ldi	r24, 0x0C	; 12
+ 174:	8e e0       	ldi	r24, 0x0E	; 14
  176:	a0 df       	rcall	.-192    	; 0xb8 <COMMAND>
  178:	80 ed       	ldi	r24, 0xD0	; 208
  17a:	8a 95       	dec	r24
@@ -309,365 +309,175 @@ void str_LCD(const char* str)
 
 int main(void)
 {
+ 1d6:	cf 93       	push	r28
+ 1d8:	df 93       	push	r29
+ 1da:	00 d0       	rcall	.+0      	; 0x1dc <main+0x6>
+ 1dc:	00 d0       	rcall	.+0      	; 0x1de <main+0x8>
+ 1de:	1f 92       	push	r1
+ 1e0:	cd b7       	in	r28, 0x3d	; 61
+ 1e2:	de b7       	in	r29, 0x3e	; 62
     /* Replace with your application code */
     DDRC = 0xFF;
- 1d6:	8f ef       	ldi	r24, 0xFF	; 255
- 1d8:	84 bb       	out	0x14, r24	; 20
+ 1e4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1e6:	84 bb       	out	0x14, r24	; 20
 	DDRD = 0x00;
- 1da:	11 ba       	out	0x11, r1	; 17
+ 1e8:	11 ba       	out	0x11, r1	; 17
 	PORTC = 0x00;
- 1dc:	15 ba       	out	0x15, r1	; 21
+ 1ea:	15 ba       	out	0x15, r1	; 21
 	LCD_INIT();
- 1de:	bc df       	rcall	.-136    	; 0x158 <LCD_INIT>
+ 1ec:	b5 df       	rcall	.-150    	; 0x158 <LCD_INIT>
 	
-	unsigned char cnt_go = 0;
+	unsigned char x=1;
 	
-	unsigned long cnt = 0;
+	str_LCD("0000");
+ 1ee:	80 e0       	ldi	r24, 0x00	; 0
+ 1f0:	91 e0       	ldi	r25, 0x01	; 1
+ 1f2:	d0 df       	rcall	.-96     	; 0x194 <str_LCD>
 	
-	unsigned long time_cnt = 9999;
- 1e0:	0f 2e       	mov	r0, r31
- 1e2:	ff e0       	ldi	r31, 0x0F	; 15
- 1e4:	4f 2e       	mov	r4, r31
- 1e6:	f7 e2       	ldi	r31, 0x27	; 39
- 1e8:	5f 2e       	mov	r5, r31
- 1ea:	61 2c       	mov	r6, r1
- 1ec:	71 2c       	mov	r7, r1
- 1ee:	f0 2d       	mov	r31, r0
-	PORTC = 0x00;
-	LCD_INIT();
-	
-	unsigned char cnt_go = 0;
-	
-	unsigned long cnt = 0;
- 1f0:	c1 2c       	mov	r12, r1
- 1f2:	d1 2c       	mov	r13, r1
- 1f4:	76 01       	movw	r14, r12
+	unsigned char num[5] = {0,0,0,0};
+ 1f4:	fe 01       	movw	r30, r28
+ 1f6:	31 96       	adiw	r30, 0x01	; 1
+ 1f8:	85 e0       	ldi	r24, 0x05	; 5
+ 1fa:	df 01       	movw	r26, r30
+ 1fc:	1d 92       	st	X+, r1
+ 1fe:	8a 95       	dec	r24
+ 200:	e9 f7       	brne	.-6      	; 0x1fc <main+0x26>
     DDRC = 0xFF;
 	DDRD = 0x00;
 	PORTC = 0x00;
 	LCD_INIT();
 	
-	unsigned char cnt_go = 0;
- 1f6:	d0 e0       	ldi	r29, 0x00	; 0
-	    COMMAND(0b00000010);
-		MOVE(1,7);
-		str_LCD("TIME");
-		
-		MOVE(2,5);
-		DATA((cnt/100000)%10 + '0');
- 1f8:	0f 2e       	mov	r0, r31
- 1fa:	fa e0       	ldi	r31, 0x0A	; 10
- 1fc:	8f 2e       	mov	r8, r31
- 1fe:	91 2c       	mov	r9, r1
- 200:	a1 2c       	mov	r10, r1
- 202:	b1 2c       	mov	r11, r1
- 204:	f0 2d       	mov	r31, r0
-		}
-		time_cnt+=2;
-		if(cnt == 1000000) cnt = 0;
-		
-		
-		if((!(PIND & 0x01)) & 100 < time_cnt)
- 206:	c1 e0       	ldi	r28, 0x01	; 1
-			 cnt_go = !cnt_go;
-			 time_cnt = 0;
-		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
-		{
-			cnt_go = 0;
- 208:	00 e0       	ldi	r16, 0x00	; 0
-	unsigned long cnt = 0;
+	unsigned char x=1;
+ 202:	11 e0       	ldi	r17, 0x01	; 1
 	
-	unsigned long time_cnt = 9999;
+	unsigned char num[5] = {0,0,0,0};
+	
     while (1) 
     {
-	    COMMAND(0b00000010);
- 20a:	82 e0       	ldi	r24, 0x02	; 2
- 20c:	55 df       	rcall	.-342    	; 0xb8 <COMMAND>
+		if(!(PIND & 0x01))
+ 204:	80 99       	sbic	0x10, 0	; 16
+ 206:	04 c0       	rjmp	.+8      	; 0x210 <main+0x3a>
+		{
+			if(x!=1)
+ 208:	11 30       	cpi	r17, 0x01	; 1
+ 20a:	39 f0       	breq	.+14     	; 0x21a <main+0x44>
+			{
+				x--;
+ 20c:	11 50       	subi	r17, 0x01	; 1
+ 20e:	05 c0       	rjmp	.+10     	; 0x21a <main+0x44>
+			}
+		}
+		else if(!(PIND & 0x02))
+ 210:	81 99       	sbic	0x10, 1	; 16
+ 212:	03 c0       	rjmp	.+6      	; 0x21a <main+0x44>
+		{
+			if(x!=4)
+ 214:	14 30       	cpi	r17, 0x04	; 4
+ 216:	09 f0       	breq	.+2      	; 0x21a <main+0x44>
+			{
+				x++;
+ 218:	1f 5f       	subi	r17, 0xFF	; 255
+			}
+		}
+		if(!(PIND & 0x04))
+ 21a:	82 99       	sbic	0x10, 2	; 16
+ 21c:	16 c0       	rjmp	.+44     	; 0x24a <main+0x74>
+		{
+			if (num[x]!=9)
+ 21e:	21 2f       	mov	r18, r17
+ 220:	30 e0       	ldi	r19, 0x00	; 0
+ 222:	e1 e0       	ldi	r30, 0x01	; 1
+ 224:	f0 e0       	ldi	r31, 0x00	; 0
+ 226:	ec 0f       	add	r30, r28
+ 228:	fd 1f       	adc	r31, r29
+ 22a:	e2 0f       	add	r30, r18
+ 22c:	f3 1f       	adc	r31, r19
+ 22e:	80 81       	ld	r24, Z
+ 230:	89 30       	cpi	r24, 0x09	; 9
+ 232:	81 f1       	breq	.+96     	; 0x294 <main+0xbe>
+			{
+				
+				DATA('0'+(++num[x]));
+ 234:	e1 e0       	ldi	r30, 0x01	; 1
+ 236:	f0 e0       	ldi	r31, 0x00	; 0
+ 238:	ec 0f       	add	r30, r28
+ 23a:	fd 1f       	adc	r31, r29
+ 23c:	e2 0f       	add	r30, r18
+ 23e:	f3 1f       	adc	r31, r19
+ 240:	91 e0       	ldi	r25, 0x01	; 1
+ 242:	98 0f       	add	r25, r24
+ 244:	90 83       	st	Z, r25
+ 246:	8f 5c       	subi	r24, 0xCF	; 207
+ 248:	60 df       	rcall	.-320    	; 0x10a <DATA>
+			}
+		}
+		if(!(PIND & 0x08))
+ 24a:	83 99       	sbic	0x10, 3	; 16
+ 24c:	16 c0       	rjmp	.+44     	; 0x27a <main+0xa4>
+		{
+			if (num[x]!=0)
+ 24e:	21 2f       	mov	r18, r17
+ 250:	30 e0       	ldi	r19, 0x00	; 0
+ 252:	e1 e0       	ldi	r30, 0x01	; 1
+ 254:	f0 e0       	ldi	r31, 0x00	; 0
+ 256:	ec 0f       	add	r30, r28
+ 258:	fd 1f       	adc	r31, r29
+ 25a:	e2 0f       	add	r30, r18
+ 25c:	f3 1f       	adc	r31, r19
+ 25e:	80 81       	ld	r24, Z
+ 260:	88 23       	and	r24, r24
+ 262:	59 f0       	breq	.+22     	; 0x27a <main+0xa4>
+			{
+				
+				DATA('0'+(--num[x]));
+ 264:	e1 e0       	ldi	r30, 0x01	; 1
+ 266:	f0 e0       	ldi	r31, 0x00	; 0
+ 268:	ec 0f       	add	r30, r28
+ 26a:	fd 1f       	adc	r31, r29
+ 26c:	e2 0f       	add	r30, r18
+ 26e:	f3 1f       	adc	r31, r19
+ 270:	9f ef       	ldi	r25, 0xFF	; 255
+ 272:	98 0f       	add	r25, r24
+ 274:	90 83       	st	Z, r25
+ 276:	81 5d       	subi	r24, 0xD1	; 209
 void MOVE(int y, int x)
 {
 	unsigned char data;
 	if(y==1) data=0x7F+x;
 	else data=0xBF+x;
 	COMMAND(data);
- 20e:	86 e8       	ldi	r24, 0x86	; 134
- 210:	53 df       	rcall	.-346    	; 0xb8 <COMMAND>
-	unsigned long time_cnt = 9999;
-    while (1) 
-    {
-	    COMMAND(0b00000010);
-		MOVE(1,7);
-		str_LCD("TIME");
- 212:	80 e0       	ldi	r24, 0x00	; 0
- 214:	91 e0       	ldi	r25, 0x01	; 1
- 216:	be df       	rcall	.-132    	; 0x194 <str_LCD>
-void MOVE(int y, int x)
-{
-	unsigned char data;
-	if(y==1) data=0x7F+x;
-	else data=0xBF+x;
-	COMMAND(data);
- 218:	84 ec       	ldi	r24, 0xC4	; 196
- 21a:	4e df       	rcall	.-356    	; 0xb8 <COMMAND>
- 21c:	c7 01       	movw	r24, r14
-	    COMMAND(0b00000010);
-		MOVE(1,7);
-		str_LCD("TIME");
-		
-		MOVE(2,5);
-		DATA((cnt/100000)%10 + '0');
- 21e:	b6 01       	movw	r22, r12
- 220:	20 ea       	ldi	r18, 0xA0	; 160
- 222:	36 e8       	ldi	r19, 0x86	; 134
- 224:	41 e0       	ldi	r20, 0x01	; 1
- 226:	50 e0       	ldi	r21, 0x00	; 0
- 228:	97 d0       	rcall	.+302    	; 0x358 <__udivmodsi4>
- 22a:	ca 01       	movw	r24, r20
- 22c:	b9 01       	movw	r22, r18
- 22e:	a5 01       	movw	r20, r10
- 230:	94 01       	movw	r18, r8
- 232:	92 d0       	rcall	.+292    	; 0x358 <__udivmodsi4>
- 234:	80 e3       	ldi	r24, 0x30	; 48
- 236:	86 0f       	add	r24, r22
- 238:	68 df       	rcall	.-304    	; 0x10a <DATA>
- 23a:	c7 01       	movw	r24, r14
-		DATA((cnt/10000)%10 + '0');
- 23c:	b6 01       	movw	r22, r12
- 23e:	20 e1       	ldi	r18, 0x10	; 16
- 240:	37 e2       	ldi	r19, 0x27	; 39
- 242:	40 e0       	ldi	r20, 0x00	; 0
- 244:	50 e0       	ldi	r21, 0x00	; 0
- 246:	88 d0       	rcall	.+272    	; 0x358 <__udivmodsi4>
- 248:	ca 01       	movw	r24, r20
- 24a:	b9 01       	movw	r22, r18
- 24c:	a5 01       	movw	r20, r10
- 24e:	94 01       	movw	r18, r8
- 250:	83 d0       	rcall	.+262    	; 0x358 <__udivmodsi4>
- 252:	80 e3       	ldi	r24, 0x30	; 48
- 254:	86 0f       	add	r24, r22
- 256:	59 df       	rcall	.-334    	; 0x10a <DATA>
- 258:	8a e3       	ldi	r24, 0x3A	; 58
-		DATA(':');
- 25a:	57 df       	rcall	.-338    	; 0x10a <DATA>
- 25c:	c7 01       	movw	r24, r14
-	    DATA((cnt/1000)%10 + '0');
- 25e:	b6 01       	movw	r22, r12
- 260:	28 ee       	ldi	r18, 0xE8	; 232
- 262:	33 e0       	ldi	r19, 0x03	; 3
- 264:	40 e0       	ldi	r20, 0x00	; 0
- 266:	50 e0       	ldi	r21, 0x00	; 0
- 268:	77 d0       	rcall	.+238    	; 0x358 <__udivmodsi4>
- 26a:	ca 01       	movw	r24, r20
- 26c:	b9 01       	movw	r22, r18
- 26e:	a5 01       	movw	r20, r10
- 270:	94 01       	movw	r18, r8
- 272:	72 d0       	rcall	.+228    	; 0x358 <__udivmodsi4>
- 274:	80 e3       	ldi	r24, 0x30	; 48
- 276:	86 0f       	add	r24, r22
  278:	48 df       	rcall	.-368    	; 0x10a <DATA>
- 27a:	c7 01       	movw	r24, r14
-	    DATA((cnt/100)%10 + '0');
- 27c:	b6 01       	movw	r22, r12
- 27e:	24 e6       	ldi	r18, 0x64	; 100
- 280:	30 e0       	ldi	r19, 0x00	; 0
- 282:	40 e0       	ldi	r20, 0x00	; 0
- 284:	50 e0       	ldi	r21, 0x00	; 0
- 286:	68 d0       	rcall	.+208    	; 0x358 <__udivmodsi4>
- 288:	ca 01       	movw	r24, r20
- 28a:	b9 01       	movw	r22, r18
- 28c:	a5 01       	movw	r20, r10
- 28e:	94 01       	movw	r18, r8
- 290:	63 d0       	rcall	.+198    	; 0x358 <__udivmodsi4>
- 292:	80 e3       	ldi	r24, 0x30	; 48
- 294:	86 0f       	add	r24, r22
- 296:	39 df       	rcall	.-398    	; 0x10a <DATA>
- 298:	8a e3       	ldi	r24, 0x3A	; 58
-		DATA(':');
- 29a:	37 df       	rcall	.-402    	; 0x10a <DATA>
- 29c:	c7 01       	movw	r24, r14
-	    DATA((cnt/10)%10 + '0');
- 29e:	b6 01       	movw	r22, r12
- 2a0:	a5 01       	movw	r20, r10
- 2a2:	94 01       	movw	r18, r8
- 2a4:	59 d0       	rcall	.+178    	; 0x358 <__udivmodsi4>
- 2a6:	16 2f       	mov	r17, r22
- 2a8:	ca 01       	movw	r24, r20
- 2aa:	b9 01       	movw	r22, r18
- 2ac:	a5 01       	movw	r20, r10
- 2ae:	94 01       	movw	r18, r8
- 2b0:	53 d0       	rcall	.+166    	; 0x358 <__udivmodsi4>
- 2b2:	80 e3       	ldi	r24, 0x30	; 48
- 2b4:	86 0f       	add	r24, r22
- 2b6:	29 df       	rcall	.-430    	; 0x10a <DATA>
- 2b8:	80 e3       	ldi	r24, 0x30	; 48
- 2ba:	81 0f       	add	r24, r17
- 2bc:	26 df       	rcall	.-436    	; 0x10a <DATA>
- 2be:	8f eb       	ldi	r24, 0xBF	; 191
-		DATA(cnt%10 + '0');
- 2c0:	9d e5       	ldi	r25, 0x5D	; 93
- 2c2:	01 97       	sbiw	r24, 0x01	; 1
- 2c4:	f1 f7       	brne	.-4      	; 0x2c2 <main+0xec>
- 2c6:	00 c0       	rjmp	.+0      	; 0x2c8 <main+0xf2>
+ 27a:	8f e7       	ldi	r24, 0x7F	; 127
+ 27c:	81 0f       	add	r24, r17
+ 27e:	1c df       	rcall	.-456    	; 0xb8 <COMMAND>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 2c8:	00 00       	nop
- 2ca:	d1 30       	cpi	r29, 0x01	; 1
- 2cc:	29 f4       	brne	.+10     	; 0x2d8 <main+0x102>
- 2ce:	92 e0       	ldi	r25, 0x02	; 2
- 2d0:	c9 0e       	add	r12, r25
- 2d2:	d1 1c       	adc	r13, r1
-		_delay_ms(6);
-		if(cnt_go == 1)
- 2d4:	e1 1c       	adc	r14, r1
- 2d6:	f1 1c       	adc	r15, r1
-		{
-			 cnt+=2;
- 2d8:	82 e0       	ldi	r24, 0x02	; 2
- 2da:	48 0e       	add	r4, r24
- 2dc:	51 1c       	adc	r5, r1
- 2de:	61 1c       	adc	r6, r1
- 2e0:	71 1c       	adc	r7, r1
+ 280:	bf ef       	ldi	r27, 0xFF	; 255
+ 282:	23 ec       	ldi	r18, 0xC3	; 195
+ 284:	89 e0       	ldi	r24, 0x09	; 9
+ 286:	b1 50       	subi	r27, 0x01	; 1
+ 288:	20 40       	sbci	r18, 0x00	; 0
+ 28a:	80 40       	sbci	r24, 0x00	; 0
+ 28c:	e1 f7       	brne	.-8      	; 0x286 <main+0xb0>
+ 28e:	00 c0       	rjmp	.+0      	; 0x290 <main+0xba>
+ 290:	00 00       	nop
+ 292:	b8 cf       	rjmp	.-144    	; 0x204 <main+0x2e>
+			{
+				
+				DATA('0'+(++num[x]));
+			}
 		}
-		time_cnt+=2;
- 2e2:	90 e4       	ldi	r25, 0x40	; 64
- 2e4:	c9 16       	cp	r12, r25
- 2e6:	92 e4       	ldi	r25, 0x42	; 66
- 2e8:	d9 06       	cpc	r13, r25
- 2ea:	9f e0       	ldi	r25, 0x0F	; 15
-		if(cnt == 1000000) cnt = 0;
- 2ec:	e9 06       	cpc	r14, r25
- 2ee:	f1 04       	cpc	r15, r1
- 2f0:	19 f4       	brne	.+6      	; 0x2f8 <main+0x122>
- 2f2:	c1 2c       	mov	r12, r1
- 2f4:	d1 2c       	mov	r13, r1
- 2f6:	76 01       	movw	r14, r12
- 2f8:	80 b3       	in	r24, 0x10	; 16
- 2fa:	81 70       	andi	r24, 0x01	; 1
- 2fc:	8c 17       	cp	r24, r28
- 2fe:	99 f0       	breq	.+38     	; 0x326 <main+0x150>
- 300:	8c 2f       	mov	r24, r28
-		
-		
-		if((!(PIND & 0x01)) & 100 < time_cnt)
- 302:	95 e6       	ldi	r25, 0x65	; 101
- 304:	49 16       	cp	r4, r25
- 306:	51 04       	cpc	r5, r1
- 308:	61 04       	cpc	r6, r1
- 30a:	71 04       	cpc	r7, r1
- 30c:	08 f4       	brcc	.+2      	; 0x310 <main+0x13a>
- 30e:	80 2f       	mov	r24, r16
- 310:	88 23       	and	r24, r24
- 312:	49 f0       	breq	.+18     	; 0x326 <main+0x150>
- 314:	8c 2f       	mov	r24, r28
- 316:	d1 11       	cpse	r29, r1
- 318:	80 2f       	mov	r24, r16
- 31a:	d8 2f       	mov	r29, r24
- 31c:	80 b3       	in	r24, 0x10	; 16
-		{
-			 cnt_go = !cnt_go;
- 31e:	41 2c       	mov	r4, r1
- 320:	51 2c       	mov	r5, r1
- 322:	32 01       	movw	r6, r4
- 324:	72 cf       	rjmp	.-284    	; 0x20a <main+0x34>
-			 time_cnt = 0;
-		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
- 326:	80 b3       	in	r24, 0x10	; 16
-		
-		
-		if((!(PIND & 0x01)) & 100 < time_cnt)
-		{
-			 cnt_go = !cnt_go;
-			 time_cnt = 0;
- 328:	86 95       	lsr	r24
- 32a:	81 70       	andi	r24, 0x01	; 1
- 32c:	8c 17       	cp	r24, r28
- 32e:	09 f4       	brne	.+2      	; 0x332 <main+0x15c>
-		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
- 330:	6c cf       	rjmp	.-296    	; 0x20a <main+0x34>
- 332:	8c 2f       	mov	r24, r28
- 334:	93 e3       	ldi	r25, 0x33	; 51
- 336:	49 16       	cp	r4, r25
- 338:	51 04       	cpc	r5, r1
- 33a:	61 04       	cpc	r6, r1
- 33c:	71 04       	cpc	r7, r1
- 33e:	08 f4       	brcc	.+2      	; 0x342 <main+0x16c>
- 340:	80 2f       	mov	r24, r16
- 342:	88 23       	and	r24, r24
- 344:	09 f4       	brne	.+2      	; 0x348 <main+0x172>
- 346:	61 cf       	rjmp	.-318    	; 0x20a <main+0x34>
- 348:	41 2c       	mov	r4, r1
- 34a:	51 2c       	mov	r5, r1
- 34c:	32 01       	movw	r6, r4
- 34e:	c1 2c       	mov	r12, r1
- 350:	d1 2c       	mov	r13, r1
-		{
-			cnt_go = 0;
-			cnt = 0;
-			time_cnt = 0;
- 352:	76 01       	movw	r14, r12
- 354:	d0 2f       	mov	r29, r16
- 356:	59 cf       	rjmp	.-334    	; 0x20a <main+0x34>
+		if(!(PIND & 0x08))
+ 294:	83 9b       	sbis	0x10, 3	; 16
+ 296:	e6 cf       	rjmp	.-52     	; 0x264 <main+0x8e>
+ 298:	f0 cf       	rjmp	.-32     	; 0x27a <main+0xa4>
 
-00000358 <__udivmodsi4>:
-			 time_cnt = 0;
-		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
-		{
-			cnt_go = 0;
-			cnt = 0;
- 358:	a1 e2       	ldi	r26, 0x21	; 33
- 35a:	1a 2e       	mov	r1, r26
- 35c:	aa 1b       	sub	r26, r26
-			 cnt_go = !cnt_go;
-			 time_cnt = 0;
-		}
-		if((!(PIND & 0x02)) & 50 < time_cnt)
-		{
-			cnt_go = 0;
- 35e:	bb 1b       	sub	r27, r27
- 360:	fd 01       	movw	r30, r26
- 362:	0d c0       	rjmp	.+26     	; 0x37e <__udivmodsi4_ep>
+0000029a <_exit>:
+ 29a:	f8 94       	cli
 
-00000364 <__udivmodsi4_loop>:
- 364:	aa 1f       	adc	r26, r26
- 366:	bb 1f       	adc	r27, r27
- 368:	ee 1f       	adc	r30, r30
- 36a:	ff 1f       	adc	r31, r31
- 36c:	a2 17       	cp	r26, r18
- 36e:	b3 07       	cpc	r27, r19
- 370:	e4 07       	cpc	r30, r20
- 372:	f5 07       	cpc	r31, r21
- 374:	20 f0       	brcs	.+8      	; 0x37e <__udivmodsi4_ep>
- 376:	a2 1b       	sub	r26, r18
- 378:	b3 0b       	sbc	r27, r19
- 37a:	e4 0b       	sbc	r30, r20
- 37c:	f5 0b       	sbc	r31, r21
-
-0000037e <__udivmodsi4_ep>:
- 37e:	66 1f       	adc	r22, r22
- 380:	77 1f       	adc	r23, r23
- 382:	88 1f       	adc	r24, r24
- 384:	99 1f       	adc	r25, r25
- 386:	1a 94       	dec	r1
- 388:	69 f7       	brne	.-38     	; 0x364 <__udivmodsi4_loop>
- 38a:	60 95       	com	r22
- 38c:	70 95       	com	r23
- 38e:	80 95       	com	r24
- 390:	90 95       	com	r25
- 392:	9b 01       	movw	r18, r22
- 394:	ac 01       	movw	r20, r24
- 396:	bd 01       	movw	r22, r26
- 398:	cf 01       	movw	r24, r30
- 39a:	08 95       	ret
-
-0000039c <_exit>:
- 39c:	f8 94       	cli
-
-0000039e <__stop_program>:
- 39e:	ff cf       	rjmp	.-2      	; 0x39e <__stop_program>
+0000029c <__stop_program>:
+ 29c:	ff cf       	rjmp	.-2      	; 0x29c <__stop_program>
