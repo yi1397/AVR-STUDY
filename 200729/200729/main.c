@@ -1,11 +1,12 @@
 /*
- * 200723.c
+ * 200729.c
  *
- * Created: 2020-07-23 오전 9:21:30
+ * Created: 2020-07-29 오전 10:21:30
  * Author : user
  */ 
 
 #define F_CPU 16000000UL
+#include <stdlib.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -86,59 +87,21 @@ void str_LCD(const char* str)
 	}
 }
 
-void func1()
-{
-	PORTE = PORTE == 0xFF ? ~0x01 : (PORTE << 1) + 1;
-}
-
-void func2()
-{
-	PORTE = PORTE == 0xFF ? ~0x80 : (PORTE >> 1) + 0x80;
-}
-
-void (*funcs[2])() = {func1, func2};
-
 int main(void)
 {
     /* Replace with your application code */
 	
-	DDRC = 0xFF;
-	DDRD = 0x00;
-	DDRE = 0xFF;
-	PORTC = 0x00;
-	PORTE = ~0x01;
+	ADMUX = 0x40;
+	ADCSRA = 0x87;
 	LCD_INIT();
-	
-	int set = 1;
-	
     while (1) 
     {
-		if(!(PIND & 0x01))
-		{
-			if(set!=0)
-			{
-				set--;
-			}
-		}
-		else if(!(PIND & 0x02))
-		{
-			if(set!=1)
-			{
-				set++;
-			}
-		}
+		ADCSRA |= 0x40;
+		while((ADCSRA & 0x10) != 0x10);
 		
-		COMMAND(0b00000001);
-		if(set == 0)
-		{
-			str_LCD(" RIGHT");
-		}
-		if(set == 1)
-		{
-			str_LCD(" LEFT");
-		}
-		funcs[set]();
-		_delay_ms(100);
+		char str[7];
+		sprintf(str, "%d", (ADCH << 8) | ADCL);
+		str_LCD("test");
     }
 }
 
