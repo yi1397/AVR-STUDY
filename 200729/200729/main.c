@@ -10,7 +10,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-
 void COMMAND(unsigned char byte)
 {
 	_delay_ms(2);
@@ -87,21 +86,37 @@ void str_LCD(const char* str)
 	}
 }
 
+int init_adc(void)
+{
+	ADMUX = 0x40;
+	ADCSRA = 0x87;
+}
+
 int main(void)
 {
     /* Replace with your application code */
+	DDRC = 0xFF;
+	DDRF = 0x00;
+	PORTC = 0x00;
 	
-	ADMUX = 0x40;
-	ADCSRA = 0x87;
+	init_adc();
+	
 	LCD_INIT();
+	
+	unsigned char adc_low, adc_high;
+	
     while (1) 
     {
+		COMMAND(0b00000001);
 		ADCSRA |= 0x40;
 		while((ADCSRA & 0x10) != 0x10);
-		
+		adc_low = ADCL;
+		adc_high = ADCH;
+
 		char str[7];
-		sprintf(str, "%d", (ADCH << 8) | ADCL);
-		str_LCD("test");
+		sprintf(str, " %d", (adc_high << 8) | adc_low);
+		str_LCD(str);
+		_delay_ms(300);
     }
 }
 
